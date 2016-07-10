@@ -7,7 +7,7 @@ zeitplan-titel=Zeitplan
 zeitplan-no-events=- Zur Zeit keine Events eingetragen -
 zeitplan-show-more=Mehr Events anzeigen
 zeitplan-show-less=Weniger Events anzeigen
-zeitplan-info=hlp.hadiko.de/zeitplan.php
+zeitplan-info=192.168.2.134/beamer
 
 sds-titel=Spiel der Stunde
 sds-current=Das Spiel der Stunde:
@@ -15,13 +15,15 @@ sds-next=wird Spiel der Stunde in
 sds-no-games=- Zur Zeit keine Spiele eingetragen -
 sds-show-more=Mehr Spiele anzeigen
 sds-show-less=Weniger Spiele anzeigen
-sds-info=hlp.hadiko.de/sds.php
+sds-info=192.168.2.134/beamer
 
 spielersuche-titel=Mitspieler gesucht
 spielersuche-game=Spiel
 spielersuche-location=Via
 spielersuche-from=Von
 spielersuche-no-requests=- Zur Zeit keine Gesuche eingetragen -
-spielersuche-info=hlp.hadiko.de/spielersuche
+spielersuche-info=192.168.2.134/beamer
 spielersuche-show-more=Mehr Gesuche anzeigen
 spielersuche-show-less=Weniger Gesuche anzeigen
+
+wetter-url=http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/107400.png
