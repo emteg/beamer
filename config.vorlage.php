@@ -1,7 +1,9 @@
 <?php
-$config["datenbankBenutzer"] = "username";
-$config["datenbankPasswort"] = "password";
-$config["datenbankName"] = "infobeamer";
+$config["beamercontrolPath"] = "../beamercontrol/";
 
+// Load config values from beamercontrol
+require_once $config["beamercontrolPath"] . "config.values.php";
+
+// Overwrite rootDir
 $config["rootDir"] = "/beamer";
 ?>
