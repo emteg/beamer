@@ -33,11 +33,14 @@ if ($alarmAnzeigen) {
   $aktuellesModul = strtolower($aktuellesModulName);
 }
 
+// Name des aktuellen Designs laden
+$design = getDesignName($datenbank);
+
 require_once "./module/" . $aktuellesModul . "/" . $aktuellesModul . ".modul.php";
 
 // Modul-Objekt erzeugen, Daten laden lassen und Modul anzeigen
 $modul = modulErzeugen($aktuellesModulName, $datenbank);
-modulAusgeben($modul, $naechstePlaylistPosition);
+modulAusgeben($modul, $design, $naechstePlaylistPosition);
 
 /* Funktionen */
 
@@ -76,11 +79,17 @@ function modulErzeugen($name, $datenbank) {
 	return $modul;
 }
 
-function modulAusgeben($modul, $naechstePosition) {
+function getDesignName($datenbank) {
+	$einstellung = new TEinstellung();
+	return $einstellung->read("design", $datenbank);
+}
+
+function modulAusgeben($modul, $design, $naechstePosition) {
 	global $aktuellePlaylistPosition;
 	
 	$smarty = new Smarty();
-	$smarty->setTemplateDir("./module/" . strtolower($modul->getName()) . "/");
+	$templateDir = "./designs/" . $design . "/";
+	$smarty->setTemplateDir($templateDir);
 	
 	$smarty->assign("modulName", $modul->getName());
 	$smarty->assign("naechstePosition", $naechstePosition);
@@ -99,6 +108,27 @@ function modulAusgeben($modul, $naechstePosition) {
 		$smarty->assign($key, $var);
 	}
 	
-	$smarty->display("display.tpl");
+	try {
+		$smarty->display(strtolower($modul->getName()) . ".tpl");
+	} catch (Exception $e) {
+		displayError($e, $modul, $templateDir);
+	}
+}
+
+function displayError($e, $modul, $templateDir) {
+	echo "Failed to create output:<br/>";
+	echo $templateDir . "<br/>";
+	echo $e->getMessage() . "<br/>";
+	echo "The following variables are available:<br/>";
+	foreach ($modul->getTemplateVars() as $key => $var) {
+		if (!is_array($var)) {
+			echo $key . ": " . $var . "<br/>";
+		} else {
+			echo $key . ": ";
+			var_dump($var);
+			echo "<br/>";
+		}
+	}
+	die();
 }
 ?>
