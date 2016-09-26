@@ -28,6 +28,10 @@ abstract class Modul {
 	public function getTemplateVars() {
 		return $this->templateVars;
 	}
+
+	public function getTemplateVar($name) {
+		return $this->templateVars[$name];
+	}
 	
 	public function getName() {
 		return get_class($this);
