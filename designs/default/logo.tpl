@@ -1,4 +1,4 @@
-{extends file="../modul.tpl"}
+{extends file="./modul.tpl"}
 {block name=logo}
 	<img src="./designs/{$design}/logo" class="imgGross">
 {/block}

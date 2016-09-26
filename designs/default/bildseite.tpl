@@ -1,4 +1,4 @@
-{extends file="../modul.tpl"}
+{extends file="./modul.tpl"}
 {block name=logo}
 {if $hatDaten && $layout == "Mittig"}
 		<div class="imgAutoSizeContainer">

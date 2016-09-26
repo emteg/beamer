@@ -1,4 +1,4 @@
-{extends file="../modul.tpl"}
+{extends file="./modul.tpl"}
 {block name=titel}<h1>{$strings["spielersuche-titel"]}</h1>{/block}
 {block name=body}
 		<table class="table-auto-height">

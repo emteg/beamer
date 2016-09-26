@@ -1,4 +1,4 @@
-{extends file="../modul.tpl"}
+{extends file="./modul.tpl"}
 {block name=body}
 		<h2>Pizza-Verkaufsstatistik</h2>
 		<div class="zweiSpalten">
