@@ -85,8 +85,15 @@ function modulAusgeben($modul, $naechstePosition) {
 	$smarty->assign("modulName", $modul->getName());
 	$smarty->assign("naechstePosition", $naechstePosition);
 	
-	$smarty->assign("url", $_SERVER["PHP_SELF"] . "?playlistItem=" . $aktuellePlaylistPosition);
-	
+	if ($modul->getTemplateVar("fontZoom") != 100) {
+		$zoom = "&fontZoom=" . $modul->getTemplateVar("fontZoom");
+	} else {
+		$zoom = "";
+	}
+
+	$smarty->assign("url", $_SERVER["PHP_SELF"] . 
+		"?playlistItem=" . $naechstePosition . 
+		$zoom);
 	
 	foreach ($modul->getTemplateVars() as $key => $var) {
 		$smarty->assign($key, $var);

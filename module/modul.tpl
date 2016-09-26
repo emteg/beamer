@@ -3,11 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>{$modulName}</title>
-    {if $naechstePosition >= 0}
-		<meta http-equiv="refresh" content="{$modulAnzeigeDauer};url=./index.php?playlistItem={$naechstePosition}">
-    {else}
-    <meta http-equiv="refresh" content="{$modulAnzeigeDauer};url={$url}">
-    {/if}
+    		<meta http-equiv="refresh" content="{$modulAnzeigeDauer};url={$url}">
 		<link rel="stylesheet" type="text/css" href="./designs/{$design}/font/font.css">
 		<link rel="stylesheet" type="text/css" href="./designs/{$design}/infobeamer.css">
 	</head>
