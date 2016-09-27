@@ -1,4 +1,4 @@
-{extends file="../modul.tpl"}
+{extends file="./modul.tpl"}
 {block name=body}
 	<div class="datum">
 		{$wochentag}, {$tag}. {$monat} {$jahr}

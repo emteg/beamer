@@ -17,6 +17,8 @@ if (isset($_GET["format"]) && $_GET["format"] == "flipdot") {
   $flipDot = false;
 }
 
+$design = getDesignName($datenbank);
+
 // Gewünschtes Modul aus URL auslesen
 if (isset($_GET["modul"])) {
   $zielModul = $_GET["modul"];
@@ -37,7 +39,7 @@ require_once "./module/" . strtolower($modulName) . "/" . strtolower($modulName)
 
 // Modul-Objekt erzeugen, Daten laden lassen und Modul anzeigen
 $modul = modulErzeugen($modulName, $datenbank);
-modulAusgeben($modul, -1);
+modulAusgeben($modul, $design, -1);
 
 
 
@@ -59,11 +61,12 @@ function modulErzeugen($name, $datenbank) {
 	return $modul;
 }
 
-function modulAusgeben($modul, $naechstePosition) {
+function modulAusgeben($modul, $design, $naechstePosition) {
 	global $flipDot;
   
 	$smarty = new Smarty();
-	$smarty->setTemplateDir("./module/" . strtolower($modul->getName()) . "/");
+	$templateDir = "./designs/" . $design . "/";
+	$smarty->setTemplateDir($templateDir);
 	
 	$smarty->assign("modulName", $modul->getName());
 	$smarty->assign("naechstePosition", -1);
@@ -77,7 +80,11 @@ function modulAusgeben($modul, $naechstePosition) {
   if ($flipDot) {
     echo $modul->getFlipDotOutput();
   } else {
-    $smarty->display("display.tpl");
+	try {
+		$smarty->display(strtolower($modul->getName()) . ".tpl");
+	} catch (Exception $e) {
+		displayError($e, $modul, $templateDir);
+	}
   }
 }
 
@@ -85,12 +92,35 @@ function menuAusgeben($module, $zielModul) {
   global $config;
   
   $smarty = new Smarty();
-	$smarty->setTemplateDir("./seiten/templates/");
+	$templateDir = "./seiten/templates/";
+	$smarty->setTemplateDir($templateDir);
 	
   $smarty->assign("module", $module);
   $smarty->assign("zielModul", $zielModul);
   $smarty->assign("config", $config);
   
 	$smarty->display("view.tpl");
+}
+
+function displayError($e, $modul, $templateDir) {
+	echo "Failed to create output:<br/>";
+	echo $templateDir . "<br/>";
+	echo $e->getMessage() . "<br/>";
+	echo "The following variables are available:<br/>";
+	foreach ($modul->getTemplateVars() as $key => $var) {
+		if (!is_array($var)) {
+			echo $key . ": " . $var . "<br/>";
+		} else {
+			echo $key . ": ";
+			var_dump($var);
+			echo "<br/>";
+		}
+	}
+	die();
+}
+
+function getDesignName($datenbank) {
+	$einstellung = new TEinstellung();
+	return $einstellung->read("design", $datenbank);
 }
 ?>
