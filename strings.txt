@@ -27,3 +27,7 @@ spielersuche-show-more=Mehr Gesuche anzeigen
 spielersuche-show-less=Weniger Gesuche anzeigen
 
 wetter-url=http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/107400.png
+
+vvsdeparture-stationCount=2
+vvsdeparture-stationId0=5006320
+vvsdeparture-stationId1=5001300
