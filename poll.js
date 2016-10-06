@@ -12,7 +12,8 @@ function httpGetAsync(theUrl, callback) {
 
 function callback(contents) {
   if (contents != "" && contents != alarmAnzeigen) {
-    location.href = ".";
+    //location.href = ".";
+    location.reload();
   }
 }
 
