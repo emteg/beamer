@@ -3,20 +3,20 @@ require_once "./klassen/einstellung.class.php";
 
 abstract class Modul {
     protected $templateVars = Array();
-    
+
     public function datenLaden($datenbank) {
         $this->getModulAnzeigeDauer($datenbank);
         $this->templateVars["zeit"] = date("H:i");
-        
-        $this->templateVars["alarmAnzeigen"] = 
+
+        $this->templateVars["alarmAnzeigen"] =
             $this->getEinstellung("alarmAnzeigen", $datenbank, "false");
 
         $this->templateVars["alarmText"] = 
             $this->getEinstellung("alarmText", $datenbank);
         $this->templateVars["strings"] = $this->loadStrings();
-        
+
         $this->templateVars["fontZoom"] = $this->fontZoomAuslesen();
-        
+
         $this->templateVars["design"] =
             $this->getEinstellung("design", $datenbank, "default");
         $this->templateVars["event"] =

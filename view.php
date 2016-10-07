@@ -63,42 +63,48 @@ function modulErzeugen($name, $datenbank) {
 
 function modulAusgeben($modul, $design, $naechstePosition) {
 	global $flipDot;
-  
+
 	$smarty = new Smarty();
 	$templateDir = "./designs/" . $design . "/";
 	$smarty->setTemplateDir($templateDir);
-	
+
 	$smarty->assign("modulName", $modul->getName());
 	$smarty->assign("naechstePosition", -1);
-  
-  $smarty->assign("url", $_SERVER["PHP_SELF"] . "?modul=" . $modul->getName());
-	
+
+        if ($modul->getTemplateVar("fontZoom") != 100) {
+                $zoom = "&fontZoom=" . $modul->getTemplateVar("fontZoom");
+        } else {
+                $zoom = "";
+        }
+
+	$smarty->assign("url", $_SERVER["PHP_SELF"] . "?modul=" . $modul->getName() . $zoom);
+
 	foreach ($modul->getTemplateVars() as $key => $var) {
 		$smarty->assign($key, $var);
 	}
-  
-  if ($flipDot) {
-    echo $modul->getFlipDotOutput();
-  } else {
-	try {
-		$smarty->display(strtolower($modul->getName()) . ".tpl");
-	} catch (Exception $e) {
-		displayError($e, $modul, $templateDir);
+
+	if ($flipDot) {
+		echo $modul->getFlipDotOutput();
+	} else {
+		try {
+			$smarty->display(strtolower($modul->getName()) . ".tpl");
+		} catch (Exception $e) {
+			displayError($e, $modul, $templateDir);
+		}
 	}
-  }
 }
 
 function menuAusgeben($module, $zielModul) {
-  global $config;
-  
-  $smarty = new Smarty();
+	global $config;
+
+	$smarty = new Smarty();
 	$templateDir = "./seiten/templates/";
 	$smarty->setTemplateDir($templateDir);
-	
-  $smarty->assign("module", $module);
-  $smarty->assign("zielModul", $zielModul);
-  $smarty->assign("config", $config);
-  
+
+	$smarty->assign("module", $module);
+	$smarty->assign("zielModul", $zielModul);
+	$smarty->assign("config", $config);
+
 	$smarty->display("view.tpl");
 }
 

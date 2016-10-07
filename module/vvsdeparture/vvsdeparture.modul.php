@@ -54,14 +54,16 @@ class Vvsdeparture extends Modul {
 		foreach ($result["departureList"] as $departure) {
 			$countdown = $departure["countdown"];
 
-			// Real Date Time
-			$hd = $departure["realDateTime"]["hour"];
-			if (strlen($hd) == 1) {
-				$hd = "0" . $hd;
-			}
-			$md = $departure["realDateTime"]["minute"];
-			if (strlen($md) == 1) {
-				$md = "0" . $md;
+			if (isset($departure["realDateTime"])) {
+				// Real Date Time
+				$hd = $departure["realDateTime"]["hour"];
+				if (strlen($hd) == 1) {
+					$hd = "0" . $hd;
+				}
+				$md = $departure["realDateTime"]["minute"];
+				if (strlen($md) == 1) {
+					$md = "0" . $md;
+				}
 			}
 
 			// Scheduled Date Time
@@ -74,7 +76,7 @@ class Vvsdeparture extends Modul {
 				$m = "0" . $m;
 			}
 
-			if ($hd != $h || $md != $m) {
+			if (isset($departure["realDateTime"]) && ($hd != $h || $md != $m)) {
 				$delayed = true;
 				$dep = $hd. ":" . $md;
 			} else {
