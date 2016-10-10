@@ -26,8 +26,8 @@ spielersuche-info=192.168.2.134/beamer
 spielersuche-show-more=Mehr Gesuche anzeigen
 spielersuche-show-less=Weniger Gesuche anzeigen
 
-wetter-url=http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/107400.png
+wetter-url=http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/097400.png
 
-vvsdeparture-stationCount=2
-vvsdeparture-stationId0=5006320
-vvsdeparture-stationId1=5001300
+vvsdeparture-stationCount=1
+vvsdeparture-stationId0=5007605
+vvsdeparture-resultCount=8

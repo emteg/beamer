@@ -4,10 +4,12 @@ class Vvsdeparture extends Modul {
 		parent::datenLaden($datenbank);
 
 		$stationIds = $this->getStationIds();
-		$this->templateVars["departures"] = Array();		
+		$this->templateVars["departures"] = Array();
+
+		$resultCount = $this->templateVars["strings"]["vvsdeparture-resultCount"];
 
 		foreach ($stationIds as $id) {
-			$data = $this->requestDepartures($id);
+			$data = $this->requestDepartures($id, $resultCount);
 			$departures = $this->parseResult($data);
 		}
 
@@ -40,8 +42,8 @@ class Vvsdeparture extends Modul {
 		return $result;
 	}
 
-	private function requestDepartures($stationId) {
-		$url = $this->getURL($stationId);
+	private function requestDepartures($stationId, $resultCount) {
+		$url = $this->getURL($stationId, $resultCount);
 		$json = file_get_contents($url);
 		return json_decode($json, true);
 	}
@@ -96,7 +98,7 @@ class Vvsdeparture extends Modul {
 		$this->templateVars["departures"][$station] = $departures;
 	}
 
-	private function getURL($stationId) {
+	private function getURL($stationId, $resultCount) {
 		$url = "http://www2.vvs.de/vvs/widget/XML_DM_REQUEST?";
 		$url .= 'zocationServerActive=1';
 		$url .= '&lsShowTrainsExplicit=1';
@@ -104,7 +106,7 @@ class Vvsdeparture extends Modul {
 		$url .= '&language=de';
 		$url .= '&SpEncId=0';
 		$url .= '&anySigWhenPerfectNoOtherMatches=1';
-		$url .= '&limit=4';
+		$url .= '&limit=' . $resultCount;
 		$url .= '&depArr=departure';
 		$url .= '&type_dm=any';
 		$url .= '&anyObjFilter_dm=2';
