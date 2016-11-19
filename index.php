@@ -103,6 +103,9 @@ function modulAusgeben($modul, $design, $naechstePosition) {
 	$smarty->assign("url", $_SERVER["PHP_SELF"] . 
 		"?playlistItem=" . $naechstePosition . 
 		$zoom);
+       $smarty->assign("next_url", $_SERVER["PHP_SELF"] . 
+		"?playlistItem=" . $naechstePosition . 
+		$zoom);
 	
 	foreach ($modul->getTemplateVars() as $key => $var) {
 		$smarty->assign($key, $var);
