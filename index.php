@@ -101,7 +101,7 @@ function modulAusgeben($modul, $design, $naechstePosition) {
 	}
 
 	$smarty->assign("url", $_SERVER["PHP_SELF"] . 
-		"?playlistItem=" . $naechstePosition . 
+		"?playlistItem=" . $aktuellePlaylistPosition . 
 		$zoom);
        $smarty->assign("next_url", $_SERVER["PHP_SELF"] . 
 		"?playlistItem=" . $naechstePosition . 
